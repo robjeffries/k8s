@@ -1,0 +1,23 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update apt cache and make sure Vim, Curl and Unzip are installed
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      loop:
+        - acl
+    
+    - name: remove swap
+      shell: "swapoff -a"
+    
+    - name: configure docker cgroup driver
+      lineinfile:
+        path: /etc/docker/daemon.json
+        line: '{"exec-opts": ["native.cgroupdriver=systemd"]}'
+        insertafter: EOF
+    
+    - name: restart docker
+      ansible.builtin.systemd:
+        state: restarted
+        name: docker
