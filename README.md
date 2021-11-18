@@ -14,4 +14,5 @@ ansible-playbook -Kki hosts --ask-vault-pass 04_join_podnet.yaml
 
 # References:
 https://www.arubacloud.com/tutorial/how-to-create-kubernetes-cluster-with-kubeadm-and-ansible-ubuntu-20-04.aspx
+
 https://www.linuxsysadmins.com/install-kubernetes-cluster-with-ansible/
